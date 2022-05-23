@@ -20,7 +20,8 @@ export default function FeaturedInfo() {
 
 
 
-  console.log(perc);
+  
+ 
   return (
     <div className="featured">
       <div className="featuredItem">
