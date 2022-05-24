@@ -112,6 +112,26 @@ export default function NewProduct() {
           <input type="text" placeholder="jeans,skirts" onChange={handleCat} />
         </div>
         <div className="addProductItem">
+          <label>Color</label>
+          <select name="color" onChange={handleChange}>
+            <option value="white">white</option>
+            <option value="black">black</option>
+            <option value="red">red</option>
+            <option value="blue">blue</option>
+          </select>
+        </div>
+        <div className="addProductItem">
+          <label>Size</label>
+          <select name="size" onChange={handleChange}>
+            <option value="XS">XS</option>
+            <option value="S">S</option>
+            <option value="M">M</option>
+            <option value="L">L</option>
+            <option value="XL">XL</option>
+          </select>
+        </div>
+
+        <div className="addProductItem">
           <label>Stock</label>
           <select name="inStock" onChange={handleChange}>
             <option value="true">Yes</option>
