@@ -6,11 +6,14 @@ import { Publish } from "@material-ui/icons";
 import { useSelector } from "react-redux";
 import { useEffect, useMemo, useState } from "react";
 import { userRequest } from "../../requestMethods";
+import { updateProduct } from "../../Redux/apiCalls";
+import { useDispatch} from "react-redux";
 
 export default function Product() {
   const location = useLocation();
   const productId = location.pathname.split("/")[2];
   const [pStats, setPStats] = useState([]);
+  const dispatch = useDispatch();
 
   const product = useSelector((state) =>
     state.product.products.find((product) => product._id === productId)
@@ -54,6 +57,24 @@ export default function Product() {
     getStats();
   }, [productId, MONTHS]);
 
+
+  const [data, setData] = useState({
+    title:"",
+    desc:"",
+    price:"",
+    
+  
+  })
+
+  const handleChange = (e)=>{
+    setData({...data, [e.target.name]:e.target.value})
+  }
+  const handleSubmit = async(e)=>{
+    updateProduct(data, dispatch)
+  
+  }
+
+
   return (
     <div className="product">
       <div className="productTitleContainer">
@@ -88,16 +109,16 @@ export default function Product() {
         </div>
       </div>
       <div className="productBottom">
-        <form className="productForm">
+        <form className="productForm" onSubmit={(e)=>handleSubmit(e)}>
           <div className="productFormLeft">
-            <label>Product Name</label>
-            <input type="text" placeholder={product.title} />
+            <label >Product Name</label>
+            <input name="title" type="text" placeholder={product.title} onChange={(e)=>handleChange(e)}/>
             <label>Product Description</label>
-            <input type="text" placeholder={product.desc} />
+            <input name="desc" type="text" placeholder={product.desc} onChange={(e)=>handleChange(e)}/>
             <label>Price</label>
-            <input type="text" placeholder={product.price} />
+            <input name="price" type="text" placeholder={product.price} onChange={(e)=>handleChange(e)}/>
             <label>In Stock</label>
-            <select name="inStock" id="idStock">
+            <select name="inStock" id="idStock" onChange={(e)=>handleChange(e)}>
               <option value="true">Yes</option>
               <option value="false">No</option>
             </select>
