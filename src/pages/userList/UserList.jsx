@@ -1,16 +1,14 @@
 import "./userList.css";
 import { DataGrid } from "@material-ui/data-grid";
 import { DeleteOutline } from "@material-ui/icons";
-import { userRows } from "../../dummyData";
-import { useState , useEffect} from "react";
+import {  useEffect} from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getUser } from "../../Redux/apiCalls";
+import { deleteUser, getUser } from "../../Redux/apiCalls";
 
 export default function UserList() {
   const dispatch = useDispatch();
-  const [data, setData] = useState(userRows);
   const {user} = useSelector((state) => state.user);
-  console.log(user)
+  // console.log(user)
   // const [users, setUsers] = useState([]);
 
 
@@ -29,7 +27,7 @@ export default function UserList() {
   // }, []);
 
   const handleDelete = (id) => {
-    setData(data.filter((item) => item.id !== id));
+    deleteUser(id, dispatch);
   };
   
   const columns = [
@@ -48,16 +46,16 @@ export default function UserList() {
       },
     },
     { field: "email", headerName: "Email", width: 200 },
-    {
-      field: "status",
-      headerName: "Status",
-      width: 120,
-    },
-    {
-      field: "transaction",
-      headerName: "Transaction Volume",
-      width: 160,
-    },
+    // {
+    //   field: "status",
+    //   headerName: "Status",
+    //   width: 120,
+    // },
+    // {
+    //   field: "transaction",
+    //   headerName: "Transaction Volume",
+    //   width: 160,
+    // },
     {
       field: "action",
       headerName: "Action",
@@ -70,7 +68,7 @@ export default function UserList() {
             </Link> */}
             <DeleteOutline
               className="userListDelete"
-              onClick={() => handleDelete(params.row.id)}
+              onClick={() => handleDelete(params.row._id)}
             />
           </>
         );
