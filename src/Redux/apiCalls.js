@@ -74,3 +74,15 @@ export const getUser = async (dispatch) => {
     dispatch(getUserFailure());
   }
 };
+
+//Delete Users
+
+export const deleteUser = async (id, dispatch) => {
+  dispatch(deleteUserStart());
+  try {
+     const res = await userRequest.delete(`/user/${id}`);
+    dispatch(deleteUserSuccess(id));
+  } catch (err) {
+    dispatch(deleteUserFailure());
+  }
+};
