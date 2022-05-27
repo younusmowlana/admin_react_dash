@@ -8,6 +8,7 @@ import { useEffect, useMemo, useState } from "react";
 import { userRequest } from "../../requestMethods";
 import { updateProduct } from "../../Redux/apiCalls";
 import { useDispatch} from "react-redux";
+import axios from "axios";
 
 export default function Product() {
   const location = useLocation();
@@ -70,7 +71,11 @@ export default function Product() {
     setData({...data, [e.target.name]:e.target.value})
   }
   const handleSubmit = async(e)=>{
-    updateProduct(data, dispatch)
+    e.preventDefault()
+
+   // updateProduct(data, dispatch)
+    const response = await userRequest.put(`/product/${productId}`,data)
+    console.log(response.data)
   
   }
 
@@ -118,7 +123,7 @@ export default function Product() {
             <label>Price</label>
             <input name="price" type="text" placeholder={product.price} onChange={(e)=>handleChange(e)}/>
             <label>In Stock</label>
-            <select name="inStock" id="idStock" onChange={(e)=>handleChange(e)}>
+            <select name="inStock" id="idStock" >
               <option value="true">Yes</option>
               <option value="false">No</option>
             </select>
