@@ -10,7 +10,7 @@ export default function FeaturedInfo() {
   useEffect(() => {
     const getIncome = async () => {
       try {
-        const res = await userRequest.get("order/income");
+        const res = await userRequest.get("orders/income");
         
         setIncome(res.data);
        
