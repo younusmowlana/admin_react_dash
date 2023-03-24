@@ -20,6 +20,7 @@ export default function WidgetLg() {
   const Button = ({ type }) => {
     return <button className={"widgetLgButton " + type}>{type}</button>;
   };
+  console.log(orders)
   return (
     <div className="widgetLg">
       <h3 className="widgetLgTitle">Latest transactions</h3>
